@@ -1,0 +1,23 @@
+package kr.or.ddit.controller.counsel;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/counsel")
+public class CounselController {
+	
+	@GetMapping("/counselList")
+	public String counselList() {
+//		model.addAttribute("alarm", "1");
+		return "counsel/counselList";
+	}
+	@GetMapping("/counselApp")
+	public String counselApp() {
+//		model.addAttribute("alarm", "1");
+		return "counsel/counselApp";
+	}
+	
+}

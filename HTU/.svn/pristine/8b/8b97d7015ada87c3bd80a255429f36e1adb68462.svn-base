@@ -1,0 +1,69 @@
+package kr.or.ddit.vo;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+/**
+ * 강의계획신청 테이블VO
+ * @author PC-20
+ *
+ */
+public class LectureApplyVO {
+	private String lecaCd;
+	private String proCd;
+	private String conCd;
+	private String depCd;
+	private String comdCd;
+	private String roomCd;
+	private int lecaYear;
+	private int lecaSem;
+	private String lecaNm;
+	private String lecaCon;
+	private int lecaTrg;
+	private int lecaCrd;
+	private int lecaPer;
+	private int lecaCap;
+	private String lecaSche;
+	private String lecaBook;
+	private String lecaNote;
+	private int lecaEva;
+	private int lecaTemp;
+	
+	// 교수의 정보를 가져오기 위한 필드
+	private ProfessorVO professorVO;
+	// 승인 정보를 가져오기 위한 필드
+	private ConsentVO consentVO;
+	// 학과 정보를 가져오기 위한 필드
+	private DepartmentVO departmentVO;
+	// 전공 정보를 가져오기 위한 필드
+	private CommonDetailVO commonDetailVO;
+	// 호실 정보를 가져오기 위한 필드
+	private RoomVO roomVO;
+	
+// resultMap
+// <result property="lecaCd" column="LECA_CD"/>
+// <result property="proCd" column="PRO_CD"/>
+// <result property="conCd" column="CON_CD"/>
+// <result property="depCd" column="DEP_CD"/>
+// <result property="comdCd" column="COMD_CD"/>
+// <result property="roomCd" column="ROOM_CD"/>
+// <result property="lecaYear" column="LECA_YEAR"/>
+// <result property="lecaSem" column="LECA_SEM"/>
+// <result property="lecaNm" column="LECA_NM"/>
+// <result property="lecaCon" column="LECA_CON"/>
+// <result property="lecaTrg" column="LECA_TRG"/>
+// <result property="lecaCrd" column="LECA_CRD"/>
+// <result property="lecaPer" column="LECA_PER"/>
+// <result property="lecaCap" column="LECA_CAP"/>
+// <result property="lecaSche" column="LECA_SCHE"/>
+// <result property="lecaBook" column="LECA_BOOK"/>
+// <result property="lecaNote" column="LECA_NOTE"/>
+// <result property="lecaEva" column="LECA_EVA"/>
+// <result property="lecaTemp" column="LECA_TEMP"/>
+}

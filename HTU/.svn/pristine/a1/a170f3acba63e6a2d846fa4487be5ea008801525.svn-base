@@ -1,0 +1,35 @@
+
+const alarmDiv = $("#alarmDiv");
+let socket = null;
+
+$(function() {
+  connectWS();
+});
+
+// 소켓
+connectWS = function() {
+  let ws = new SockJS("http://localhost/echo");
+  socket = ws;
+  
+  ws.onopen = function() {
+    console.log("연결 완료");
+    sendMessageToServer("로그인사용자");
+  }
+  
+  ws.onmessage = function(event) {
+    console.log(event.data);
+    if (event.data.length > 0) {
+      let newAlarm = `<li scope="col">${event.data}</li>`;
+      $("#alarmDiv").append(newAlarm);
+    };
+  };
+  
+  ws.onclose = function() {
+    console.log("close");
+  };
+};
+
+
+function sendMessageToServer(message) {
+  socket.send(message);
+};

@@ -1,0 +1,28 @@
+package kr.or.ddit.service.common.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.mapper.UnivMailMapper;
+import kr.or.ddit.service.common.UnivMailService;
+import kr.or.ddit.vo.UnivMailVO;
+
+@Service
+public class UnivMailServiceImpl implements UnivMailService {
+
+	@Autowired
+	UnivMailMapper univMailMapper;
+	
+	@Override
+	public List<UnivMailVO> inbox() {
+		return this.univMailMapper.inbox();
+	}
+
+	@Override
+	public List<UnivMailVO> inbox(String userCd) {
+		return this.univMailMapper.inbox(userCd);
+	}
+
+}

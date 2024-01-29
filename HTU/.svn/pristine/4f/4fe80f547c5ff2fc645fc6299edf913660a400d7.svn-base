@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+   <!-- style.css -->
+   <link href="/resources/css/counsel.css" rel="stylesheet" type="text/css">
+
+  <form name="frm" action="/student/counsel/counselAppPost?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+    <!-- 내학번 -->
+    <input type="text" name="stuCd" hidden="hidden" value="24101001">
+    <input type="text" name="conCd" hidden="hidden" value="CON01">
+    <div>
+      <p>상담종류</p>
+      <input id="comdCd" name="comdCd" value="comdCd"/>
+    </div>
+    
+    <p class="submit"><button type="submit">수정</button></p>
+    <a href="counsel_list.html" class="cancel">취소</a>
+    <sec:csrfInput/>
+  </form>

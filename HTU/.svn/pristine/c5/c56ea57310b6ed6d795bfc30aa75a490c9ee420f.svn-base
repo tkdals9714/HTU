@@ -1,0 +1,28 @@
+package kr.or.ddit.controller.professor;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import kr.or.ddit.service.professor.LectureApplyService;
+import kr.or.ddit.vo.LectureApplyVO;
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
+@Controller
+/**
+ * 강의계획신청 컨트롤러
+ * @author PC-20
+ *
+ */
+public class LectureApplyController {
+	
+	@Autowired
+	LectureApplyService lectureApplyService;
+	
+	
+	public LectureApplyVO createPost(LectureApplyVO lectureApplyVO) {
+		
+		int result = this.lectureApplyService.createPost(lectureApplyVO);
+		
+		return lectureApplyVO;
+	}
+}

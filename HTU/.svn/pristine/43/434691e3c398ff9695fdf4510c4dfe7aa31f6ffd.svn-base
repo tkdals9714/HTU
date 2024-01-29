@@ -1,0 +1,9 @@
+package kr.or.ddit.mapper;
+
+import kr.or.ddit.vo.LectureVO;
+
+public interface LectureAttendanceMapper {
+
+	public LectureVO detail(String lecCd);
+
+}

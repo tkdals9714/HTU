@@ -1,0 +1,59 @@
+package kr.or.ddit.controller.employee;
+
+import java.security.Principal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.or.ddit.controller.student.CrewController;
+import kr.or.ddit.mapper.ApprovalMapper;
+import kr.or.ddit.service.employee.CrewEmpService;
+import kr.or.ddit.vo.ApprovalVO;
+import kr.or.ddit.vo.CrewVO;
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * 학사 관리자 동아리 컨트롤러
+ * @author 전유빈
+ *
+ */
+@Slf4j
+@Controller
+@RequestMapping("/employee/crew")
+public class CrewEmpController {
+
+	@Autowired
+	CrewEmpService crewEmpService;
+	
+	@Autowired
+	ApprovalMapper approvalMapper;
+	
+	@GetMapping("/crewAppList")
+	public String crewAppList(Model model, Principal principal) {
+		
+		String appTarget = principal.getName();
+		log.info("appTarget : {}", appTarget);
+		
+		List<ApprovalVO> appVOList = this.approvalMapper.crewAppList(appTarget);
+		log.info("appVOList : {}", appVOList);
+		
+		model.addAttribute("appVOList", appVOList);
+		
+		return "employee/crew/crewAppList";
+	}
+	
+	@GetMapping("/crewList")
+	public String crewList(Model model) {
+		
+		List<CrewVO> crewVOList = this.crewEmpService.crewList();
+		log.info("crewVOList : {}", crewVOList);
+		
+		model.addAttribute("crewVOList", crewVOList);
+		
+		return "employee/crew/crewList";
+	}
+}

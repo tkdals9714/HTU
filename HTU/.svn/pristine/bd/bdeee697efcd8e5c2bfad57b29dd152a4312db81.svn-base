@@ -1,0 +1,17 @@
+package kr.or.ddit.controller.test;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class TestController {
+	
+	
+	@GetMapping("/alarm")
+	public String alarm() {
+		return "exam/websocketAlarm/notification";
+	}
+	
+	
+	
+}

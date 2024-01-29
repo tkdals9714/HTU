@@ -1,0 +1,47 @@
+package kr.or.ddit.controller.student;
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import kr.or.ddit.util.EtcUtil;
+import kr.or.ddit.vo.UserVO;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Controller
+@RequestMapping("/student")
+@RequiredArgsConstructor
+@Slf4j
+public class StudentController {
+	
+	private final EtcUtil etcUtil;
+	
+	@GetMapping("/mypage")
+	public String myPage(Model model) {
+		
+		UserVO userVO = etcUtil.getUserVO();
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		String jsonUserVO = "";
+		try {
+			jsonUserVO = objectMapper.writeValueAsString(userVO);
+		} catch (JsonProcessingException e) {
+			log.error(e.getMessage());
+		}
+		
+		log.info("jsonUSerVO ==> {}", jsonUserVO);
+		
+		model.addAttribute("jsonUserVO", jsonUserVO);
+		
+		return "stu_home";
+	}
+	
+	
+}

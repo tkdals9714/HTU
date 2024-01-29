@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.mapper.NoticeBoardMapper">
+	
+	<resultMap type="noticeBoardVO" id="noticeBoardMap">
+		<result property="nbCd" column="NB_CD"/>
+		<result property="empCd" column="EMP_CD"/>
+		<result property="fileCd" column="FILE_CD"/>
+		<result property="nbTitle" column="NB_TITLE"/>
+		<result property="nbCon" column="NB_CON"/>
+		<result property="nbReg" column="NB_REG"/>
+		<result property="nbUdt" column="NB_UDT"/>
+		<result property="nbCnt" column="NB_CNT"/>
+		<association property="employeeVO" resultMap="employeeMap"></association>
+		<collection property="filesDetailVOList" resultMap="filesDetailMap"></collection>
+	</resultMap>
+	
+	<resultMap type="filesDetailVO" id="filesDetailMap">
+		<result property="fileSn" column="FILE_SN"/>
+		<result property="fileCd" column="FILE_CD"/>
+		<result property="filePath" column="FILE_PATH"/>
+		<result property="fileOrnm" column="FILE_ORNM"/>
+		<result property="fileSvnm" column="FILE_SVNM"/>
+		<result property="fileExtsn" column="FILE_EXTSN"/>
+		<result property="fileCon" column="FILE_CON"/>
+		<result property="fileSize" column="FILE_SIZE"/>
+	</resultMap>
+	
+	<resultMap type="employeeVO" id="employeeMap">
+		<result property="empCd" column="EMP_CD"/>
+		<result property="empDept" column="EMP_DEPT"/>
+		<result property="empPos" column="EMP_POS"/>
+		<result property="empJoin" column="EMP_JOIN"/>
+		<result property="empQuit" column="EMP_QUIT"/>	
+	</resultMap>
+	
+	<select id="list" resultMap="noticeBoardMap">
+		SELECT A.NB_CD, A.EMP_CD, A.FILE_CD, A.NB_TITLE, A. NB_CON, A.NB_REG, A.NB_UDT, A.NB_CNT, B.EMP_CD
+		FROM NOTICE_BOARD A, EMPLOYEE B
+		WHERE A.EMP_CD=B.EMP_CD
+	</select>
+</mapper>

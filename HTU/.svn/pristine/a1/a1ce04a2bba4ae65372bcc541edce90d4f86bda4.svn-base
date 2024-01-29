@@ -1,0 +1,17 @@
+package kr.or.ddit.mapper;
+
+import java.util.List;
+
+import kr.or.ddit.vo.LectureApplyVO;
+import kr.or.ddit.vo.TestVO;
+
+public interface TestMapper {
+
+	public List<TestVO> testList(String lecCd);
+
+	public LectureApplyVO lectureInfo(String lecCd);
+
+	public int testCreatePost(TestVO testVO);
+
+
+}

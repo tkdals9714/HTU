@@ -1,0 +1,14 @@
+package kr.or.ddit.mapper;
+
+import java.util.List;
+
+import kr.or.ddit.vo.ApprovalVO;
+
+public interface ApprovalMapper {
+
+	public int insert(ApprovalVO appVO);
+	
+	// 강의계획결재리스트
+	public List<ApprovalVO> getLectureApplyList();
+
+}

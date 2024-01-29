@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.mapper.CounselMapper">
+	<resultMap type="counselVO" id="counselListMap">
+	  	<result property="cnslCd" column="CNSL_CD"/>
+		<result property="stuCd" column="STU_CD"/>
+		<result property="proCd" column="PRO_CD"/>
+		<result property="conCd" column="CON_CD"/>
+		<result property="comdCd" column="COMD_CD"/>
+		<result property="cnslTitle" column="CNSL_TITLE"/>
+		<result property="cnslCon" column="CNSL_CON"/>
+		<result property="cnslDt" column="CNSL_DT"/>
+		<association property="userVO" resultMap="userVOMap"></association>
+	</resultMap>
+	<resultMap type="userVO" id="userVOMap">
+		<result property="userCd" column="USER_CD"/>
+		<result property="fileCd" column="FILE_CD"/>
+		<result property="userNm" column="USER_NM"/>
+		<result property="userNme" column="USER_NME"/>
+		<result property="userTel" column="USER_TEL"/>
+		<result property="userZip" column="USER_ZIP"/>
+		<result property="userAddr1" column="USER_ADDR1"/>
+		<result property="userAddr2" column="USER_ADDR2"/>
+		<result property="userReg1" column="USER_REG1"/>
+		<result property="userReg2" column="USER_REG2"/>
+		<result property="userMail" column="USER_MAIL"/>
+		<result property="userPass" column="USER_PASS"/>
+		<result property="userBank" column="USER_BANK"/>
+		<result property="userDepo" column="USER_DEPO"/>
+		<result property="userAcc" column="USER_ACC"/>
+		<result property="comdCd" column="COMD_CD"/>
+	</resultMap>
+	<select id="counselList" parameterType="counselVO" resultMap="counselListMap">
+		SELECT C.CNSL_CD, C.STU_CD, C.PRO_CD, C.CON_CD, C.COMD_CD, C.CNSL_TITLE, C.CNSL_CON, C.CNSL_DT,
+        U.USER_NM
+		FROM COUNSEL C,USERS U
+		WHERE C.PRO_CD=U.USER_CD
+	</select>
+	
+	<insert id="counselCreatePost" parameterType="counselVO">
+		<selectKey resultType="String" order="BEFORE" keyProperty="counselVO">
+			SELECT 'C'||TRIM(TO_CHAR(SUBSTR(MAX(CNSL_CD),2)+1,'0000'))
+			FROM COUNSEL
+		</selectKey>
+		INSERT INTO COUNSEL(CNSL_CD, STU_CD, PRO_CD, CON_CD, COMD_CD, CNSL_DT)
+		values(#{cnslCd},#{stuCd},#{proCd},#{conCd},#{comdCd},#{cnslDt});	
+	</insert>
+</mapper>

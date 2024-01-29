@@ -1,0 +1,32 @@
+package kr.or.ddit.util;
+
+import java.util.List;
+
+import javax.servlet.ServletContext;
+
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.ServletContextAware;
+
+import kr.or.ddit.mapper.CommonMapper;
+import kr.or.ddit.vo.CommonDetailVO;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Component
+@Slf4j
+@RequiredArgsConstructor
+public class CommonCodeUtil implements ServletContextAware {
+
+	private final CommonMapper commonMapper;
+
+	@Override
+	public void setServletContext(ServletContext servletContext) {
+
+		List<CommonDetailVO> commonDetailList = this.commonMapper.getCommonDetailList();
+
+		log.info("servlet ?? {}", commonDetailList.get(0).getComdNm());
+		
+		servletContext.setAttribute("commonDetailList", commonDetailList);
+	}
+
+}

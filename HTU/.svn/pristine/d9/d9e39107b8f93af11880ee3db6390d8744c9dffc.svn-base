@@ -1,0 +1,23 @@
+package kr.or.ddit.service.employee.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.mapper.SchlshipMapper;
+import kr.or.ddit.service.employee.SchlshipService;
+import kr.or.ddit.vo.StudentVO;
+
+@Service
+public class SchlshipServiceImpl implements SchlshipService {
+
+	@Autowired
+	SchlshipMapper schlshipMapper;
+	
+	@Override
+	public List<StudentVO> awardSchlship() {
+		return this.schlshipMapper.awardSchlship();
+	}
+
+}

@@ -1,0 +1,87 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<div class="tab-content">
+    <div role="tabpanel" id="react-aria-97-tabpane-design"
+        aria-labelledby="react-aria-97-tab-design"
+        class="fade pb-4 p-4 tab-pane active show">
+        <table class="text-nowrap table">
+            <thead>
+                <tr>
+                    <th scope="col">글번호</th>
+                    <th scope="col">신고번호</th>
+                    <th scope="col">신고내용</th>
+                    <th scope="col">신고일</th>
+                    <th scope="col">결재여부</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${data.content}" var="postReportVO" varStatus="stat">
+                    <tr>
+                        <th scope="row">${postReportVO.rnum}</th>
+                        <td>
+                            <c:choose>
+                                <c:when test="${postReportVO.boardVO}">
+                                    <a class="detail" href="/common/board/
+                                        <c:if test="${postReportVO.CD eq 'BORD01'}">free</c:if>
+                                        <c:if test="${postReportVO.CD eq 'BORD02'}">publicize</c:if>
+                                        <c:if test="${postReportVO.CD eq 'BORD03'}">anonymous</c:if>
+                                    /detail?bdCd=${postReportVO.bdCd}" data-lecapp-code="${postReportVO.bdCd}">
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <!-- 클릭 불가능한 상태에서 모달 창 띄우기 -->
+                                    <span style="color: red; cursor: pointer;" onclick="showDeletedModal('${postReportVO.bdCd}', '${postReportVO.prRsn}');">
+                                        ${postReportVO.prRsn}
+                                    </span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td>${postReportVO.prDetail}</td>
+                        <td><fmt:formatDate value="${postReportVO.appReg}" pattern="yyyy-MM-dd"/></td>
+                        <td>
+                            <input type="checkbox" ${postReportVO.approvalVO.appYn == 0 ? 'checked' : ''}> 결재대기
+                        </td>
+                        <td>
+                            <input type="checkbox" ${postReportVO.approvalVO.appYn == 1 ? 'checked' : ''}> 결재완료
+                        </td>
+                        <td>
+                            <input type="checkbox" ${postReportVO.approvalVO.appYn == 2 ? 'checked' : ''}> 반려
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+    <div>${data.getPagingArea()}</div>
+</div>
+
+<!-- 모달 창 -->
+<div class="modal fade" id="deletedModal" tabindex="-1" role="dialog" aria-labelledby="deletedModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletedModalLabel">삭제된 게시물</h5>
+            </div>
+            <div class="modal-body">
+                <p id="deletedModalMessage"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 클릭 불가능한 상태에서 모달 창 띄우기 함수
+    function showDeletedModal(bdCd, prRsn) {
+        // 모달 창에 표시될 메시지 설정
+        var message = '삭제된 게시물입니다. (' + prRsn + ')';
+        // 모달 창에 메시지 표시
+        $('#deletedModalMessage').text(message);
+        // 모달 창 띄우기
+        $('#deletedModal').modal('show');
+    }
+</script>

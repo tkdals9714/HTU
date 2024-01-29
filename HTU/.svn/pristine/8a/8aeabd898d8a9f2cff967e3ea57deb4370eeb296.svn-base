@@ -1,0 +1,35 @@
+package kr.or.ddit.service.employee.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.mapper.ApprovalMapper;
+import kr.or.ddit.mapper.DormitoryMapper;
+import kr.or.ddit.service.employee.DormitoryApprovalService;
+import kr.or.ddit.vo.DormitoryVO;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+public class DormitoryApprovalServiceImpl implements DormitoryApprovalService {
+	
+	@Autowired
+	ApprovalMapper approvalMapper; 
+	
+	@Autowired
+	DormitoryMapper dormitoryMapper;
+	
+	@Override
+	public int getTotal(Map<String, Object> map) {
+		return this.approvalMapper.getTotal(map);
+	}
+
+	@Override
+	public List<DormitoryVO> getDormitoryList(Map<String, Object> map) {
+		return this.approvalMapper.getDormitoryList(map);
+	}
+
+}

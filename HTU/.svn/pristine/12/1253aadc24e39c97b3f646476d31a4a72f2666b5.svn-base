@@ -1,0 +1,11 @@
+package kr.or.ddit.service.common;
+
+import kr.or.ddit.vo.CommonVO;
+
+public interface CommonService {
+
+	public int insert(CommonVO common);
+	
+	
+	
+}

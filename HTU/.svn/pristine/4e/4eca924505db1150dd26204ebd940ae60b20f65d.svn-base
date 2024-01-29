@@ -1,0 +1,23 @@
+package kr.or.ddit.vo;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+public class DepartmentVO {
+	private String depCd;
+	private String colCd;
+	private String depNm;
+	private int depMrc;
+	private int depMoc;
+	private int depCrc;
+	private int depCoc;
+	private int depCap;
+	private String depTel;
+	private int depFee;
+}

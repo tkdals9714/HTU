@@ -1,0 +1,28 @@
+//package kr.or.ddit.service.common;
+//
+//import java.util.List;
+//
+//import kr.or.ddit.vo.AcademicCalendarVO;
+//import kr.or.ddit.vo.CalendarVO;
+//import kr.or.ddit.vo.RoomVO;
+//
+//public interface AcademicCalendarService {
+//
+//	public List<AcademicCalendarVO> getListByUserCd(String userCd);
+//
+//	public List<AcademicCalendarVO> getAcademicCalendarList();
+//
+//	public List<RoomVO> getRoomListByComdCd(String comdCd);
+//
+//	public List<AcademicCalendarVO> getResListByRoomCd(String roomCd);
+//
+//	public List<List<CalendarVO>> getLectureScheduleByBldCd(String bldCd);
+//
+//	public int insert(AcademicCalendarVO academicCalendarVO);
+//
+//	public AcademicCalendarVO detail(String resCd);
+//
+//	public int delete(String resCd);
+//
+//
+//}

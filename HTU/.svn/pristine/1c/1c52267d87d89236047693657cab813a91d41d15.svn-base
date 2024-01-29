@@ -1,0 +1,19 @@
+package kr.or.ddit.controller.student;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/student")
+public class StudentController {
+	
+	@GetMapping("/mypage")
+	public String myPage(Model model) {
+		model.addAttribute("alarm", "112275");
+		return "student/mypage";
+	}
+	
+	
+}

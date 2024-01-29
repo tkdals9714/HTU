@@ -1,0 +1,63 @@
+package kr.or.ddit.controller.common;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import kr.or.ddit.service.common.NoticeBoardService;
+import kr.or.ddit.util.ArticlePage;
+import kr.or.ddit.vo.BoardVO;
+import kr.or.ddit.vo.NoticeBoardVO;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequestMapping("/common/board/notice")
+@Controller
+public class NoticeBoardController {
+	
+	@Autowired
+	NoticeBoardService noticeBoardService;
+	
+	@GetMapping(value="/list")
+	public String list(Model model) {
+
+		List<NoticeBoardVO> list = this.noticeBoardService.list();
+		log.info("list : " + list);
+		
+		model.addAttribute("list",list);
+		
+		return "board/noticeboard/list";
+		
+	}
+	
+	@GetMapping("/detail")
+	public String detail(Model model, String nbCd) {
+		log.info("nbCd : " + nbCd);
+		NoticeBoardVO noticeBoardVO = this.noticeBoardService.detail(nbCd);
+		
+		log.info("NoticeBoardVO : ", noticeBoardVO);
+		
+		model.addAttribute("NoticeBoardVO", noticeBoardVO);
+		
+		return "board/noticeboard/detail";
+	}
+	
+	@GetMapping("/count")
+	@ResponseBody
+	public int count(String nbCd) {
+		
+		int cnt = this.noticeBoardService.count(nbCd);
+		
+		return cnt;
+	}
+}

@@ -1,0 +1,79 @@
+package kr.or.ddit.service.professor.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import kr.or.ddit.mapper.LectureApplyMapper;
+import kr.or.ddit.service.professor.LectureApplyService;
+import kr.or.ddit.vo.ConsentVO;
+import kr.or.ddit.vo.LectureApplyVO;
+import kr.or.ddit.vo.LectureScheduleVO;
+import kr.or.ddit.vo.LectureVO;
+
+@Service
+public class LectureApplyServiceImpl implements LectureApplyService{
+	
+	@Autowired
+	LectureApplyMapper lectureApplyMapper;
+	
+	@Transactional
+	@Override
+	public int createLectureApply(LectureApplyVO lectureApplyVO) {
+		
+//		// 교수번호 세팅
+//		lectureApplyVO.setProCd(lectureApplyVO.getProfessorVO().getProCd());
+//		// 승인코드 세팅
+//		lectureApplyVO.setConCd(lectureApplyVO.getConsentVO().getConCd());
+//		// 강의대상학과 세팅
+//		lectureApplyVO.setDepCd(lectureApplyVO.getDepartmentVO().getDepCd());
+//		// 전공구문코드 세팅
+		return 0;
+	}
+	
+	@Transactional
+	@Override
+	public int createLectureApplyConsent(ConsentVO consentVO) {
+		
+		// 승인테이블에 교수코드 세팅
+		consentVO.setUserCd(consentVO.getProfessorVO().getProCd());
+		// 승인데이터 생성
+		int result = this.lectureApplyMapper.createLectureApplyConsent(consentVO);
+		
+		
+		LectureApplyVO lectureApplyVO = new LectureApplyVO();
+		// 강의신청테이블의 승인VO에 생성된 승인VO 세팅 
+		lectureApplyVO.setConsentVO(consentVO);
+		// 강의신청테이블 교번에 세팅된 승인VO의 교번세팅
+		lectureApplyVO.setProCd(lectureApplyVO.getConsentVO().getUserCd());
+		// 강의신청테이블 승인코드에 세팅된 승인VO의 승인코드 세팅
+		lectureApplyVO.setConCd(lectureApplyVO.getConsentVO().getConCd());
+		// 
+		result += this.lectureApplyMapper.createLectureApply(lectureApplyVO);
+		
+		LectureVO lectureVO = new LectureVO();
+		// 강의테이블의 강의신청VO에 생성된 강의신청VO세팅
+		lectureVO.setLectureApplyVO(lectureApplyVO);
+		// 강의테이블 강의코드에 세팅된 강의신청VO의 강의신청코드세팅
+		lectureVO.setLecCd(lectureVO.getLectureApplyVO().getLecaCd());
+		// 강의 데이터 생성
+		result += this.lectureApplyMapper.createLecture(lectureVO);
+		
+//		LectureScheduleVO lectureScheduleVO = 
+//				consentVO.getLectureApplyVO().getLectureVO().
+//											getLectureScheduleVO();
+		
+		LectureScheduleVO lectureScheduleVO = new LectureScheduleVO();
+		// 강의일정테이블의 강의VO에 생성된 강의VO세팅
+		lectureScheduleVO.setLectureVO(lectureVO);
+		// 강의일정테이블 강의코드에 세팅된 강의VO의 강의코드 세팅
+		lectureScheduleVO.setLecCd(lectureScheduleVO.getLectureVO().getLecCd());
+		// 강의일정 테이터 생성
+		result += this.lectureApplyMapper.createLectureSchedule(lectureScheduleVO);
+		
+		return result;
+	}
+
+}

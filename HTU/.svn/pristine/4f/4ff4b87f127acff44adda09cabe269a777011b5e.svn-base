@@ -1,0 +1,47 @@
+package kr.or.ddit.controller.counsel;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.or.ddit.service.counsel.CounselService;
+import kr.or.ddit.vo.CounselVO;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Controller
+@RequestMapping("/counsel")
+public class CounselController {
+	
+	@Autowired
+	CounselService counselService;
+	
+	@GetMapping("/counselList")
+	public String counselList(Model model) {
+//		model.addAttribute("alarm", "1");
+		List<CounselVO> data= this.counselService.counselList();
+		model.addAttribute("data", data);
+		log.info("data"+data);
+		return "counsel/counselList";
+	}
+	
+	@GetMapping("/counselApp")
+	public String counselApp() {
+//		model.addAttribute("alarm", "1");
+		return "counsel/counselApp";
+	}
+	
+	@PostMapping("/counselAppPost")
+	public String counselAppPost(CounselVO counselVO) {
+		int result = this.counselService.counselCreatePost(counselVO);
+		log.info("counselAppPost->counselVO"+result);
+		return "redirect:/counsel/counselList";
+	}
+	
+}

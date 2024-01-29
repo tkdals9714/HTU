@@ -1,0 +1,93 @@
+//package kr.or.ddit.controller.common;
+//
+//import java.security.Principal;
+//import java.util.Date;
+//import java.util.List;
+//
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.ResponseBody;
+//
+//import kr.or.ddit.service.common.AcademicCalendarService;
+//import kr.or.ddit.vo.CalendarVO;
+//import kr.or.ddit.vo.AcademicCalendarVO;
+//import kr.or.ddit.vo.RoomVO;
+//import lombok.RequiredArgsConstructor;
+//import lombok.extern.slf4j.Slf4j;
+//
+//	@Controller
+//	@RequiredArgsConstructor
+//	@Slf4j
+//	@RequestMapping("/academicCalendar")
+//	public class AcademicCalendarController {
+//		
+//		private final AcademicCalendarService academicCalendarService;
+//		
+//		@GetMapping("/list")
+//		public String list(Principal principal, Model model) {
+//			
+//			String userCd = principal.getName();
+//			
+//			List<AcademicCalendarVO> academicCalendarList = this.academicCalendarService.getListByUserCd(userCd);
+//			
+//			model.addAttribute("academicCalendarList", academicCalendarList);
+//			
+//			model.addAttribute("now", new Date());
+//			
+//			return "academicCalendar/resList";
+//			
+//		}
+//		
+//		@GetMapping("/current")
+//		public String current(Model model) {
+//			
+//			List<AcademicCalendarVO> academicCalendarList = this.academicCalendarService.getAcademicCalendarList();
+//			
+//			model.addAttribute("academicCalendarList", academicCalendarList);
+//			
+//			return "academicCalendar/resCurrent";
+//		}
+//		
+//		@ResponseBody
+//		@GetMapping("/getRoomListByComdCd")
+//		public List<RoomVO> getListByComdCd(String comdCd) {
+//			return this.academicCalendarService.getRoomListByComdCd(comdCd);
+//		}
+//		
+//		@ResponseBody
+//		@GetMapping("/getResListByRoomCd")
+//		public List<AcademicCalendarVO> getResListByRoomCd(String roomCd) {
+//			return this.academicCalendarService.getResListByRoomCd(roomCd);
+//		}
+//		
+//		@ResponseBody
+//		@GetMapping("/getLectureScheduleByBldCd")
+//		public List<List<CalendarVO>> getLectureScheduleByBldCd(String bldCd) {
+//			List<List<CalendarVO>> calendarList = this.academicCalendarService.getLectureScheduleByBldCd(bldCd);
+//			return calendarList;
+//		}
+//		
+//		@ResponseBody
+//		@PostMapping("/insert")
+//		public int insert(@RequestBody AcademicCalendarVO academicCalendarVO) {
+//			return this.academicCalendarService.insert(academicCalendarVO);
+//		}
+//		
+//		@ResponseBody
+//		@GetMapping("/detail")
+//		public AcademicCalendarVO detail(String resCd) {
+//			return this.academicCalendarService.detail(resCd);
+//		}
+//		
+//		@GetMapping("/delete")
+//		@ResponseBody
+//		public int delete(String resCd) {
+//			return this.academicCalendarService.delete(resCd);
+//		}
+//		
+//	}
+//

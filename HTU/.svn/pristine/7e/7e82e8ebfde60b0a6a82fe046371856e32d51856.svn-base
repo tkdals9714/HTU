@@ -1,0 +1,43 @@
+package kr.or.ddit.controller.common;
+
+import java.security.Principal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.or.ddit.security.CustomUser;
+import kr.or.ddit.service.common.UnivMailService;
+import kr.or.ddit.vo.UnivMailVO;
+import kr.or.ddit.vo.UserVO;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Controller
+@RequestMapping("/mail")
+public class UnivMailController {
+	
+	@Autowired
+	UnivMailService univMailService;
+
+	@GetMapping("/inbox")
+	public String inbox(Model model, Principal principal) {
+		
+		String userCd = principal.getName();
+		
+		List<UnivMailVO> data = this.univMailService.inbox(userCd);
+		log.info("data : " + data);
+		
+		model.addAttribute("data", data);
+		
+		return "mail/inbox";
+	}
+}

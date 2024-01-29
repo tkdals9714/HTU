@@ -1,0 +1,9 @@
+package kr.or.ddit.service.professor;
+
+import kr.or.ddit.vo.LectureVO;
+
+public interface LectureAttendanceService {
+
+	public LectureVO detail(String lecCd);
+
+}

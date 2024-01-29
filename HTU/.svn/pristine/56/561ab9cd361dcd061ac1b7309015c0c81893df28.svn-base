@@ -1,0 +1,13 @@
+package kr.or.ddit.service.counsel;
+
+import java.util.List;
+
+import kr.or.ddit.vo.CounselVO;
+
+public interface CounselService {
+
+	public List<CounselVO> counselList();
+
+	public int counselCreatePost(CounselVO counselVO);
+
+}

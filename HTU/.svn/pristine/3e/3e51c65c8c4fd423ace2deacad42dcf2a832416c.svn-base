@@ -1,0 +1,25 @@
+package kr.or.ddit.service.professor;
+
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.vo.LectureVO;
+import kr.or.ddit.vo.TaskVO;
+
+public interface TaskService {
+
+	List<LectureVO> lectureList();
+
+	int getTotal(Map<String, Object> map);
+
+	List<TaskVO> taskList(Map<String, Object> map);
+
+	TaskVO taskDetail(String taskCd);
+
+	int taskCreatePost(TaskVO taskVO);
+
+	int taskUpdate(TaskVO taskVO);
+
+	int taskDelete(TaskVO taskVO);
+
+}

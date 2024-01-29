@@ -1,0 +1,14 @@
+package kr.or.ddit.vo;
+
+import lombok.Data;
+
+@Data
+public class DormitoryVO {
+	private String domCd;
+	private String roomCd;
+	private String stuCd;
+	private String appCd;
+	private String comdCd;
+	private int domYear;
+	private int domSem;
+}

@@ -1,0 +1,26 @@
+package kr.or.ddit.controller.common;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.or.ddit.service.common.AnonymousBoardService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Controller
+@RequestMapping("/common/board/anonymous")
+@RequiredArgsConstructor
+@Slf4j
+public class AnonymousBoardController {
+	
+	private final AnonymousBoardService anonyBoardService;
+	
+	@GetMapping("/list")
+	public String list() {
+		
+		return null;
+		
+	}
+	
+}

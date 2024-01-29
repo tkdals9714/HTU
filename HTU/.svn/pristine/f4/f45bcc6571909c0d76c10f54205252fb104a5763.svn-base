@@ -1,0 +1,20 @@
+package kr.or.ddit.service.common;
+
+import java.util.List;
+
+import kr.or.ddit.vo.AcademicCalendarVO;
+import kr.or.ddit.vo.CalendarVO;
+import kr.or.ddit.vo.RoomVO;
+
+public interface AcademicCalendarService {
+
+	public List<AcademicCalendarVO> getCalendar();
+
+	public int insertCalendar(AcademicCalendarVO acCalendarVO);
+
+	public int deleteCalendar(String acCd);
+
+	public int updateCalendar(AcademicCalendarVO acCalendarVO);
+	
+
+}

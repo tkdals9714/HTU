@@ -1,0 +1,28 @@
+package kr.or.ddit.service.counsel.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.mapper.CounselMapper;
+import kr.or.ddit.service.counsel.CounselService;
+import kr.or.ddit.vo.CounselVO;
+
+@Service
+public class CounselServiceImpl implements CounselService {
+
+	@Autowired
+	CounselMapper counselMapper;
+	
+	@Override
+	public List<CounselVO> counselList(String userCd) {
+		return this.counselMapper.counselList(userCd);
+	}
+
+	@Override
+	public int counselCreatePost(CounselVO counselVO) {
+		return this.counselMapper.counselCreatePost(counselVO);
+	}
+
+}

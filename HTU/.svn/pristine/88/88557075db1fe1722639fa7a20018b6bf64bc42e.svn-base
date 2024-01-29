@@ -1,0 +1,20 @@
+package kr.or.ddit.mapper;
+
+import kr.or.ddit.vo.ApprovalVO;
+import kr.or.ddit.vo.LectureApplyVO;
+import kr.or.ddit.vo.LectureScheduleVO;
+import kr.or.ddit.vo.LectureVO;
+
+public interface LectureApplyMapper {
+
+	int createLectureApplyConsent(ApprovalVO consentVO);
+
+	int createLectureApply(LectureApplyVO lectureApplyVO);
+
+	int updateLectureApplyConCd(LectureApplyVO lectureApplyVO);
+
+//	int createLecture(LectureVO lectureVO);
+//
+//	int createLectureSchedule(LectureScheduleVO lectureScheduleVO);
+
+}

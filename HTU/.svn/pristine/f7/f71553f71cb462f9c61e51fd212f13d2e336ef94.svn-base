@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.mapper.EnrolmentMapper">
+	
+	<resultMap type="lectureVO" id="lectureMap">
+		<result property="lecCd" column="LEC_CD"/>
+		<result property="lecHcnt" column="LEC_HCNT"/>
+		<result property="lecStat" column="LEC_STAT"/>
+		<association property="lectureApplyVO" resultMap="lectureAppMap"/>
+		<association property="lectureScheduleVO" resultMap="lectureScheduleMap"/>
+		<collection property="wishLectureList" resultMap="wishLectureMap"/>
+	</resultMap>
+	
+	<resultMap type="wishLectureVO" id="wishLectureMap">
+		<result property="stuCd" column="STU_CD"/>
+		<result property="lecCd" column="LEC_CD"/>
+	</resultMap>
+	
+	<resultMap type="lectureScheduleVO" id="lectureScheduleMap">
+		<result property="lecsCd" column="LECS_CD"/>
+		<result property="lecCd" column="LEC_CD"/>
+		<result property="lecDay" column="LEC_DAY"/>
+		<result property="lecsStdt" column="LECS_STDT"/>
+		<result property="lecsEddt" column="LECS_EDDT"/>
+	</resultMap>
+	
+	<resultMap type="lectureApplyVO" id="lectureAppMap">
+		<result property="lecaStdt" column="LECA_STDT"/>
+		<result property="lecaEddt" column="LECA_EDDT"/>
+		<result property="lecaType" column="LECA_TYPE"/>
+		<result property="lecaCd" column="LECA_CD"/>
+		<result property="proCd" column="PRO_CD"/>
+		<result property="appCd" column="APP_CD"/>
+		<result property="depCd" column="DEP_CD"/>
+		<result property="roomCd" column="ROOM_CD"/>
+		<result property="lecaYear" column="LECA_YEAR"/>
+		<result property="lecaSem" column="LECA_SEM"/>
+		<result property="lecaNm" column="LECA_NM"/>
+		<result property="lecaCon" column="LECA_CON"/>
+		<result property="lecaTrg" column="LECA_TRG"/>
+		<result property="lecaCrd" column="LECA_CRD"/>
+		<result property="lecaPer" column="LECA_PER"/>
+		<result property="lecaCap" column="LECA_CAP"/>
+		<result property="lecaSche" column="LECA_SCHE"/>
+		<result property="lecaBook" column="LECA_BOOK"/>
+		<result property="lecaNote" column="LECA_NOTE"/>
+		<result property="lecaEva" column="LECA_EVA"/>
+		<result property="lecaTemp" column="LECA_TEMP"/>
+		<association property="departmentVO" resultMap="departmentMap"/>
+		<association property="professorVO" resultMap="professorMap"/>
+	</resultMap>
+	
+	<resultMap type="professorVO" id="professorMap">
+		<result property="proCd" column="PRO_CD"/>
+		<result property="depCd" column="DEP_CD"/>
+		<result property="roomCd" column="ROOM_CD"/>
+		<result property="proJoin" column="PRO_JOIN"/>
+		<result property="proRet" column="PRO_RET"/>
+		<result property="proPos" column="PRO_POS"/>
+		<association property="userVO" resultMap="userMap"/>
+	</resultMap>
+	
+	<resultMap type="userVO" id="userMap">
+		<result property="userCd" column="USER_CD"/>
+		<result property="userNm" column="USER_NM"/>
+		<result property="userNme" column="USER_NME"/>
+		<result property="userTel" column="USER_TEL"/>
+		<result property="userZip" column="USER_ZIP"/>
+		<result property="userAddr1" column="USER_ADDR1"/>
+		<result property="userAddr2" column="USER_ADDR2"/>
+		<result property="userReg1" column="USER_REG1"/>
+		<result property="userReg2" column="USER_REG2"/>
+		<result property="userMail" column="USER_MAIL"/>
+		<result property="userPass" column="USER_PASS"/>
+		<result property="userBank" column="USER_BANK"/>
+		<result property="userDepo" column="USER_DEPO"/>
+		<result property="userAcc" column="USER_ACC"/>
+		<result property="fileCd" column="FILE_CD"/>
+		<result property="comdCd" column="COMD_CD"/>
+	</resultMap>
+	
+	<resultMap type="departmentVO" id="departmentMap">
+		<result property="depCd" column="DEP_CD"/>
+		<result property="colCd" column="COL_CD"/>
+		<result property="depNm" column="DEP_NM"/>
+		<result property="depMrc" column="DEP_MRC"/>
+		<result property="depMoc" column="DEP_MOC"/>
+		<result property="depCrc" column="DEP_CRC"/>
+		<result property="depCoc" column="DEP_COC"/>
+		<result property="depCap" column="DEP_CAP"/>
+		<result property="depTel" column="DEP_TEL"/>
+		<result property="depFee" column="DEP_FEE"/>
+	</resultMap>
+	
+	<select id="getColNm" parameterType="String" resultType="String">
+		SELECT  COMD_NM
+		FROM    COMMON_DETAIL CD, COLLEGE C, DEPARTMENT D, STUDENT S
+		WHERE   S.DEP_CD = D.DEP_CD
+		AND     D.COL_CD = C.COL_CD
+		AND     C.COL_CD = CD.COMD_CD
+		AND     S.STU_CD = #{userCd}
+	</select>
+	
+	<select id="list" parameterType="studentVO" resultMap="lectureMap">
+		SELECT  L.LEC_CD, LEC_HCNT, LEC_STAT,
+		        LECA_CD, LA.PRO_CD, APP_CD, LA.DEP_CD, LA.ROOM_CD, LECA_YEAR, LECA_SEM, LECA_NM, LECA_CON, LECA_TRG, 
+		        LECA_CRD, LECA_PER, LECA_CAP, LECA_SCHE, LECA_BOOK, LECA_NOTE, LECA_EVA, LECA_TEMP, LECA_STDT, LECA_EDDT, LECA_TYPE,
+		        LECS_CD, LS.LEC_CD, LEC_DAY, LECS_STDT, LECS_EDDT,
+		        D.DEP_CD, COL_CD, DEP_NM, DEP_MRC, DEP_MOC, DEP_CRC, DEP_COC, DEP_CAP, DEP_TEL, DEP_FEE, COL_NM,
+		        WL.STU_CD, WL.LEC_CD, U.USER_NM
+		FROM    LECTURE L, LECTURE_APPLY LA, LECTURE_SCHEDULE LS, DEPARTMENT D, WISH_LECTURE WL, PROFESSOR P, USERS U
+		WHERE   LA.LECA_CD = L.LEC_CD
+		AND     LS.LEC_CD = L.LEC_CD
+		AND     D.DEP_CD = LA.DEP_CD
+		AND		WL.LEC_CD(+) = L.LEC_CD
+		AND		P.PRO_CD = LA.PRO_CD
+		AND		P.PRO_CD = U.USER_CD
+		AND     LECA_TRG = #{stuYear}
+		AND     LECA_SEM = #{stuSem}
+	</select>
+	
+	<insert id="addWishLecture" parameterType="wishLectureVO">
+		INSERT INTO WISH_LECTURE (STU_CD, LEC_CD)
+		VALUES (#{stuCd}, #{lecCd})
+	</insert>
+	
+	<delete id="removeWishLecture" parameterType="wishLectureVO">
+		DELETE FROM WISH_LECTURE
+		WHERE STU_CD = #{stuCd} AND LEC_CD = #{lecCd}	
+	</delete>
+	
+	
+</mapper>

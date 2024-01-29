@@ -1,0 +1,57 @@
+//package kr.or.ddit.vo;
+//
+//import java.util.Date;
+//
+//import lombok.Getter;
+//import lombok.NoArgsConstructor;
+//import lombok.Setter;
+//import lombok.ToString;
+//
+//@Getter
+//@Setter
+//@ToString
+//@NoArgsConstructor
+//public class AcademicCalendarVO {
+//
+//	private String acCd;
+//	
+//	private String fileCd;
+//	
+//	private String acTitle;
+//	
+//	private String acCon;
+//	
+//	private Date acStdt;
+//	
+//	private Date acEddt;
+//
+//	public Date getResEddt() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	public Date getResStdt() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	public void setStartTime(String format) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	public void setEndTime(String format) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	public void setResDate(String format) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	public void setCommonDetailVO(CommonDetailVO comdCdByRoomCd) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//}

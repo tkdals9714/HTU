@@ -1,0 +1,105 @@
+package kr.or.ddit.service.professor.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import kr.or.ddit.mapper.LectureMapper;
+import kr.or.ddit.mapper.TaskMapper;
+import kr.or.ddit.service.professor.TaskService;
+import kr.or.ddit.util.FileUtil;
+import kr.or.ddit.vo.LectureVO;
+import kr.or.ddit.vo.TaskVO;
+@Service
+public class TaskServiceImpl implements TaskService{
+	@Autowired
+	TaskMapper taskMapper;
+	
+	@Autowired
+	LectureMapper lectureMapper;
+	
+	@Autowired
+	FileUtil fileUtil;
+	
+	@Override
+	/** 강의목록 */
+	public List<LectureVO> lectureList() {
+		return this.lectureMapper.lectureList();
+	}
+
+	@Override
+	/** 페이징 처리 */
+	public int getTotal(Map<String, Object> map) {
+		return this.taskMapper.getTotal(map);
+	}
+
+	@Override
+	/** 과제목록 */
+	public List<TaskVO> taskList(Map<String, Object> map) {
+		return this.taskMapper.taskList(map);
+	}
+
+	@Override
+	/** 과제 상세 */
+	public TaskVO taskDetail(String taskCd) {
+		return this.taskMapper.taskDetail(taskCd);
+	}
+
+	@Override
+	/** 과제등록 */
+	public int taskCreatePost(TaskVO taskVO) {
+		
+		LectureVO lectureVO = new LectureVO();
+		
+		taskVO.setLectureVO(lectureVO);
+		
+		int result = this.taskMapper.taskCreatePost(taskVO);
+		// 파일업로드
+		result += this.fileUtil.uploadFile(taskVO.getUploadFiles(), taskVO.getTaskCd());
+		
+		return result;
+	}
+
+	@Override
+	/** 과제수정 */
+	public int taskUpdate(TaskVO taskVO) {
+		
+		int result = this.taskMapper.taskUpdate(taskVO);
+		
+		MultipartFile[] uploadFiles = taskVO.getUploadFiles();
+		
+		if(uploadFiles[0].getOriginalFilename().length() > 0) {
+			
+			result += this.fileUtil.updateFileUsed(taskVO.getTaskCd());
+			
+			result += this.fileUtil.uploadFile(taskVO.getUploadFiles(), taskVO.getTaskCd());
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int taskDelete(TaskVO taskVO) {
+		return this.taskMapper.taskDelete(taskVO);
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

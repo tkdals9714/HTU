@@ -1,0 +1,56 @@
+package kr.or.ddit.controller.common;
+
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import kr.or.ddit.vo.CommonDetailVO;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Controller
+@RequiredArgsConstructor
+@Slf4j
+public class CommonController {
+
+//	private final PasswordEncoder passwordEncoder;
+
+	@GetMapping("/")
+	public String test(Locale locale, Model model) {
+
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+
+		String formattedDate = dateFormat.format(date);
+
+		model.addAttribute("serverTime", formattedDate);
+		return "home";
+	}
+
+	@GetMapping("/login")
+	public String login(String error, String logout, Model model) {
+
+		if (error != null)
+			model.addAttribute("error", "정보불일치메세지");
+
+		if (logout != null)
+			model.addAttribute("logout", "로그아웃메세지");
+
+		return "login";
+	}
+	
+	@GetMapping("/sub/community")
+	public String community() {
+		return "sub/community";
+	}
+
+}
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.mapper.SchlshipMapper">
+	
+	<resultMap type="schlshipVO" id="schlMap">
+		<result property="sclCd" column="SCL_CD"/>
+		<result property="stuCd" column="STU_CD"/>
+		<result property="siCd" column="SI_CD"/>
+		<result property="appCd" column="APP_CD"/>
+		<result property="sclYear" column="SCL_YEAR"/>
+		<result property="sclSem" column="SCL_SEM"/>
+	</resultMap>
+	
+	<resultMap type="studentVO" id="stuMap">
+		<result property="stuCd" column="STU_CD"/>
+		<result property="depCd" column="DEP_CD"/>
+		<result property="comdCd" column="COMD_CD"/>
+		<result property="stuYear" column="STU_YEAR"/>
+		<result property="stuSem" column="STU_SEM"/>
+		<result property="stuMrc" column="STU_MRC"/>
+		<result property="stuMoc" column="STU_MOC"/>
+		<result property="stuCrc" column="STU_CRC"/>
+		<result property="stuCoc" column="STU_COC"/>
+		<result property="stuAddt" column="STU_ADDT"/>
+		<result property="stuGrdt" column="STU_GRDT"/>
+		<association property="departmentVO" resultMap="dpMap"></association>
+	</resultMap>
+	
+	<resultMap type="departmentVO" id="dpMap">
+		<result property="depCd" column="DEP_CD"/>
+		<result property="colCd" column="COL_CD"/>
+		<result property="depNm" column="DEP_NM"/>
+		<result property="depMrc" column="DEP_MRC"/>
+		<result property="depMoc" column="DEP_MOC"/>
+		<result property="depCrc" column="DEP_CRC"/>
+		<result property="depCoc" column="DEP_COC"/>
+		<result property="depCap" column="DEP_CAP"/>
+		<result property="depTel" column="DEP_TEL"/>
+		<result property="depFee" column="DEP_FEE"/>
+		<result property="colNm" column="COL_NM"/>
+	</resultMap>
+	
+	<select id="awardSchlship" resultMap="stuMap">
+		
+	</select>
+	
+	
+	
+</mapper>

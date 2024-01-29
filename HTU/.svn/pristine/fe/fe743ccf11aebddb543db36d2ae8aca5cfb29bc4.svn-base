@@ -1,0 +1,9 @@
+package kr.or.ddit.mapper;
+
+import kr.or.ddit.vo.ApprovalVO;
+
+public interface ApprovalMapper {
+
+	public int insert(ApprovalVO appVO);
+
+}

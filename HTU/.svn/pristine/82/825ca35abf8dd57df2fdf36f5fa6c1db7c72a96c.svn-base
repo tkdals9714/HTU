@@ -1,0 +1,61 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+   <!-- style.css -->
+   <link href="/resources/css/counsel.css" rel="stylesheet" type="text/css">
+
+  <form name="frm" action="/student/counsel/counselAppPost?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+    <!-- 내학번 -->
+    <sec:authentication property="principal.userVO" var="userVO"/>
+    <input type="text" name="stuCd" hidden="hidden" value="${userVO.userCd}">
+    <input type="text" name="conCd" hidden="hidden" value="CON01">
+    <div>
+      <p>상담종류</p>
+      <select name="comdCd" id="comdCd">
+        <option value="취업상담">취업상담</option>
+        <option value="성적상담">성적상담</option>
+        <option value="기타상담">기타상담</option>
+      </select>
+    </div>
+    <div>
+      <p>교수선택</p>
+      <select name="" id="">
+        <!-- 내 단과대 -->
+        <option value="none">==단과대선택==</option>
+      </select>
+      <select name="" id="">
+        <option value="none">==학과선택==</option>
+      </select>
+      <select name="proCd" id="proCd">
+        <option value="none">==교수선택==</option> 
+        <option name="userNm" value="10101">교수1</option>
+        <!-- 교수를 선택하면 교수의 스케쥴(개인일정)을 한번 쭉 스캔해야한다 - 스케쥴이 있는 날 또는 시간은 학생이 선택 불가능 -->
+      </select>
+    </div>
+    <!-- <p>상담제목</p><input type="text" placeholder="상담제목">
+    <p>상담내용</p>
+    <textarea name="" id="" cols="30" rows="10" placeholder="상담내용"></textarea> -->
+    <div>
+      <p>상담희망일자</p><span>
+        <!-- 상담희망일자는 다음날부터 한달이내로만 가능 -->
+      <input type="date" value="" min="2023-11-30" max="2023-12-30" required="required" name="cnslDt">
+    </div>
+    <div>
+      <p>상담희망시간</p>
+      <select name="" id="">
+        <option value="none">==시간선택==</option>
+        <option value="">09:00-10:00</option>
+        <option value="">10:00-11:00</option>
+        <option value="">11:00-12:00</option>
+        <option value="">13:00-14:00</option>
+        <option value="">14:00-15:00</option>
+        <option value="">15:00-16:00</option>
+        <option value="">16:00-17:00</option>
+        <option value="">17:00-18:00</option>
+      </select>
+      <!-- <input type="time" value="" min="09:00:00" max="17:00:00" step="1800" required="required"> -->
+    </div>
+    <p class="submit"><button type="submit">신청</button></p>
+    <a href="counsel_list.html" class="cancel">취소</a>
+    <sec:csrfInput/>
+  </form>

@@ -1,0 +1,13 @@
+package kr.or.ddit.controller.professor;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+/**
+ * 강의계획신청 컨트롤러
+ * @author PC-20
+ *
+ */
+public class LectureApplyController {
+
+}

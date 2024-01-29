@@ -1,0 +1,55 @@
+package kr.or.ddit.controller.student;
+
+import java.security.Principal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.or.ddit.service.counsel.CounselService;
+import kr.or.ddit.vo.CounselVO;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Controller
+@RequestMapping("/student/counsel")
+public class CounselController {
+	
+	@Autowired
+	CounselService counselService;
+	
+	@GetMapping("/counselList")
+	public String counselList(Model model, Principal principal) {
+		String userCd = principal.getName();
+		List<CounselVO> data= this.counselService.counselList(userCd);
+		model.addAttribute("data", data);
+		log.info("data"+data);
+		return "student/counselList";
+	}
+	
+	@GetMapping("/counselApp")
+	public String counselApp() {
+		return "student/counselApp";
+	}
+	
+	@PostMapping("/counselAppPost")
+	public String counselAppPost(CounselVO counselVO, Model model) {
+		log.warn("counselVO ==> {}", counselVO);
+		int result = this.counselService.counselCreatePost(counselVO);
+		log.info("counselAppPost->counselVO"+result);
+		model.addAttribute("alarm", counselVO.getProCd());
+		return "redirect:/student/counsel/counselList";
+	}
+	
+	@GetMapping("/counseldetail")
+	public String counseldetail(String CNSL_CD) {
+		//this.counselService.counseldetail(CNSL_CD);
+		
+		return "student/counselDetail";
+	}
+	
+}

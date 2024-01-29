@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication property="principal.userVO" var="userVO"/>
+	<div>
+<%-- 		<p>${commonDetailListt}</p> --%>
+<%-- 		<p>${userVO}</p> --%>
+		<a href="/pro/createlecapp">강의계획신청</a>
+	</div>
+	
+<!-- 	<div> -->
+<%-- 		<c:forEach var="detail" items="${commonDetailListt}"> --%>
+<%--    		 <p>${detail.comCd}</p> --%>
+<%-- </c:forEach> --%>
+<!-- 	</div> -->
+
+<script>
+  logout = function() {
+    $("#logoutForm").submit();
+  }
+  
+</script>

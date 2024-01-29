@@ -1,0 +1,40 @@
+package kr.or.ddit.controller.professor;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.or.ddit.service.professor.LectureApplyService;
+import kr.or.ddit.vo.ConsentVO;
+import kr.or.ddit.vo.LectureApplyVO;
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
+@Controller
+/**
+ * 강의계획신청 컨트롤러
+ * @author PC-20
+ *
+ */
+public class LectureApplyController {
+	
+	@Autowired
+	LectureApplyService lectureApplyService;
+	
+	@ResponseBody
+	// 승인데이터생성 -> 강의계획신청데이터생성 -> 강의데이터생성 -> 강의일정데이터생성
+	public ConsentVO createLectureApplyConsent(@RequestBody ConsentVO consentVO) {
+		
+		int result = this.lectureApplyService.createLectureApplyConsent(consentVO);
+		
+		return consentVO;
+	}
+	
+//	
+//	public LectureApplyVO createLectureApply(LectureApplyVO lectureApplyVO) {
+//		
+//		int result = this.lectureApplyService.createLectureApply(lectureApplyVO);
+//		
+//		return lectureApplyVO;
+//	}
+}

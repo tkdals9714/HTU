@@ -1,0 +1,10 @@
+package kr.or.ddit.mapper;
+
+import kr.or.ddit.vo.DormitoryVO;
+
+public interface DormitoryMapper {
+
+	int createApplyDormitoryConsent(DormitoryVO dormitoryVO);
+	
+
+}

@@ -1,0 +1,14 @@
+package kr.or.ddit.vo;
+
+import lombok.Data;
+
+@Data
+public class SchlshipVO {
+
+	private String sclCd;		//장학코드
+	private String stuCd;		//학번
+	private String siCd;		//장학구분코드
+	private String appCd;		//승인코드
+	private int sclYear;		//장학년도
+	private int sclSem;			//장학학기
+}

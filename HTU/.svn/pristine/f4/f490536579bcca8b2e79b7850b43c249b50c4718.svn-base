@@ -1,0 +1,27 @@
+package kr.or.ddit.vo;
+
+import java.util.Date;
+import java.util.List;
+
+import lombok.Data;
+
+@Data
+public class UnivMailVO {
+	
+	private String umlCd;
+	private String fileCd;
+	private String umlSender;
+	private String umlReceiver;
+	private String umlTitle;
+	private String umlCon;
+	private Date umlReg;
+	private int umlTemp;
+	private int umlYn;
+	private Date umlDt;
+	
+	private List<FilesDetailVO> filesDetailVOList;
+	
+	private UserVO userVO;	
+	
+	private List<UserVO> userVOList;
+}

@@ -1,0 +1,11 @@
+package kr.or.ddit.service.common;
+
+import java.util.List;
+
+import kr.or.ddit.vo.BoardVO;
+
+public interface AnonymousBoardService {
+	
+	public List<BoardVO> list();
+	
+}

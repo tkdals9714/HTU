@@ -1,0 +1,8 @@
+package kr.or.ddit.mapper;
+
+import kr.or.ddit.vo.PostReportVO;
+
+public interface PostReportMapper {
+	
+	public int insert(PostReportVO postReportVO);
+}

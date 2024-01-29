@@ -1,0 +1,12 @@
+package kr.or.ddit.service.common;
+
+import java.util.List;
+
+import kr.or.ddit.vo.UnivMailVO;
+
+public interface UnivMailService {
+
+	public List<UnivMailVO> inbox();
+
+
+}

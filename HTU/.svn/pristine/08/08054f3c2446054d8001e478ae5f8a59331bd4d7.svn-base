@@ -1,0 +1,12 @@
+package kr.or.ddit.service.employee;
+
+import java.util.List;
+
+import kr.or.ddit.vo.ApprovalVO;
+
+public interface LectureApplyApprovalService {
+
+
+	List<ApprovalVO> getLectureApplyList();
+
+}

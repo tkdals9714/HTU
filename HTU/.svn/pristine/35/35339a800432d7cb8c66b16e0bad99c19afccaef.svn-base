@@ -1,0 +1,18 @@
+package kr.or.ddit.vo;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+public class CollegeVO {
+	
+	private String 	colCd;
+	
+	private int 	colCrd; // 신청 가능 학점
+	
+}
